@@ -30,7 +30,7 @@ implementation:
   container:
     image: gcr.io/sandbox-rit/dataproc:latest
     command: [
-      sh, /src/deploy.sh
+      sh, code/src/dataproc.sh
     ]
     args: [
       --project-name,             {inputValue: Project name},
