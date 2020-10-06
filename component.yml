@@ -1,0 +1,44 @@
+name: dataproc
+description: Spin up dataporc cluster from Kubeflow
+inputs:
+  - name: Project name
+    type: String
+    description: 'Path of GCS directory containing exported Tensorflow model.'
+  - name: Zone
+    type: String
+    description: 'The name specified for the model when it was or get created'
+  - name: Region
+    type: String
+    description: 'The zone where data is going to be deployed'
+  - name: Bucket Name
+    type: String
+    description: 'The version of the model'
+  - name: Cluster Name
+    type: String
+    description: 'The runtime version of the model'
+  - name: Master Machine Type
+    type: String
+    description: 'The runtime version of the model'
+  - name: Worker Machine Type
+    type: String
+    description: 'The python version of the model'
+  - name: Num Worker
+    type: String
+    description: 'The packge uri of the model'
+outputs:
+implementation:
+  container:
+    image: gcr.io/sandbox-rit/dataproc:latest
+    command: [
+      sh, /src/deploy.sh
+    ]
+    args: [
+      --project-name,             {inputValue: Project name},
+      --zone,             {inputValue: Zone},
+      --region,           {inputValue: Region},
+      --bucket-name,          {inputValue: Model version},
+      --cluster-name,  {inputValue: Model runtime version},
+      --master-machine-type, {inputValue: Model prediction class},
+      --worker-machine-type,   {inputValue: Worker Machine Type},
+      --num-workers,     {inputValue: Num Worker},
+    ]
